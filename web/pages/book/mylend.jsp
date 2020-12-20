@@ -28,41 +28,25 @@
 	    	<table class="table table-bordered table-hover">
 		      <thead>
 		        <tr>
-		          <th>编号</th>
-		          <th>书名</th>
-		          <th>作者</th>
-		          <th>出版社</th>
-		          <th>图书数量</th>
-		          <th>借出数量</th>
-		          <th>剩余数量</th>
+		          <th>借阅编号</th>
+		          <th>读者编号</th>
+		          <th>读者姓名</th>
+		          <th>图书编号</th>
+		          <th>书名</th>		          
 		          <th>操作</th>
 		        </tr>
 		      </thead>
 		      <tbody>
 		        <tr>
 		          <th scope="row">1</th>
-		          <td>笑傲江湖</td>
-		          <td>金庸</td>
-		          <td>花城出版社</td>
-		          <td>10</td>
-		          <td>3</td>
-		          <td>7</td>
+		          <td>2</td>
+		          <td>Mike</td>
+		          <td>1</td>
+		          <td>笑傲江湖</td>		          
 		          <td>
-		          	<a class="btn btn-success btn-sm" href="#">借阅</a>
+		          	<a class="btn btn-success btn-sm" href="#">归还</a>
 		          </td>		          
-		        </tr>
-		        <tr>
-		          <th scope="row">1</th>
-		          <td>射雕英雄传</td>
-		          <td>金庸</td>
-		          <td>花城出版社</td>
-		          <td>5</td>
-		          <td>5</td>
-		          <td>0</td>
-		          <td>
-		          	<a class="btn btn-danger btn-sm disabled" href="#">借阅</a>
-		          </td>		                  
-		        </tr>		        
+		        </tr>		            
 		      </tbody>
 		    </table> 
 		</div>

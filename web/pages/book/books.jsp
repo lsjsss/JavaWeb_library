@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
-    <title>图书管理系统</title>
+    <title>图书管理系统-图书管理</title>
 
     <!-- Bootstrap -->
     <link href="${ctx}/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -21,54 +21,72 @@
     <![endif]-->
   </head>
   <body>
-    <jsp:include page="/pages/layout/head.jsp" />    
-    <!-- 主题内容开始 -->
+    <jsp:include page="/pages/layout/head.jsp" />     
+    <!-- 主体内容开始 -->
     <div class="container bs-docs-container">
     	<div class="row">
+    		<h3 style="text-align:center;">图书列表</h3>
 	    	<table class="table table-bordered table-hover">
 		      <thead>
 		        <tr>
 		          <th>编号</th>
-		          <th>书名</th>
-		          <th>作者</th>
-		          <th>出版社</th>
-		          <th>图书数量</th>
-		          <th>借出数量</th>
-		          <th>剩余数量</th>
+		          <th>主题</th>
+		          <th>内容</th>
+		          <th>发布时间</th>
+		          <th>发布者</th>
 		          <th>操作</th>
 		        </tr>
 		      </thead>
 		      <tbody>
 		        <tr>
 		          <th scope="row">1</th>
-		          <td>笑傲江湖</td>
-		          <td>金庸</td>
-		          <td>花城出版社</td>
-		          <td>10</td>
-		          <td>3</td>
-		          <td>7</td>
-		          <td>
-		          	<a class="btn btn-success btn-sm" href="#">借阅</a>
-		          </td>		          
+		          <td>新人报到</td>
+		          <td>大家好</td>
+		          <td>2020-11-19</td>
+		          <td>Tom</td>
+		          <td>回复 编辑 删除 查看</td>		          
 		        </tr>
 		        <tr>
-		          <th scope="row">1</th>
-		          <td>射雕英雄传</td>
-		          <td>金庸</td>
-		          <td>花城出版社</td>
-		          <td>5</td>
-		          <td>5</td>
-		          <td>0</td>
-		          <td>
-		          	<a class="btn btn-danger btn-sm disabled" href="#">借阅</a>
-		          </td>		                  
-		        </tr>		        
+		          <th scope="row">2</th>
+		          <td>新人报到</td>
+		          <td>大家好</td>
+		          <td>2020-11-19</td>
+		          <td>Tom</td>
+		          <td>回复 编辑 删除 查看</td>		          
+		        </tr>	
+		        <tr>
+		          <th scope="row">3</th>
+		          <td>新人报到</td>
+		          <td>大家好</td>
+		          <td>2020-11-19</td>
+		          <td>Tom</td>
+		          <td>回复 编辑 删除 查看</td>		          
+		        </tr>			        
 		      </tbody>
-		    </table> 
+		    </table>    	
+	    	<nav aria-label="Page navigation" style="text-align:center;">
+  			  <ul class="pagination">
+			    <li>
+			      <a href="#" aria-label="Previous">
+			        <span aria-hidden="true">&laquo;</span>
+			      </a>
+			    </li>
+			    <li><a href="#">1</a></li>
+			    <li><a href="#">2</a></li>
+			    <li><a href="#">3</a></li>
+			    <li><a href="#">4</a></li>
+			    <li><a href="#">5</a></li>
+			    <li>
+			      <a href="#" aria-label="Next">
+			        <span aria-hidden="true">&raquo;</span>
+			      </a>
+			    </li>
+			  </ul>
+			</nav>
 		</div>
     </div>
     <!-- 主体内容结束 -->
-	<jsp:include page="/pages/layout/foot.jsp" />
+    <jsp:include page="/pages/layout/foot.jsp" />
     <!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
     <script src="${ctx}/bootstrap/js/jquery1.12.4.min.js"></script>
     <!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
