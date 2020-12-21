@@ -46,13 +46,41 @@ public class SysUserServlet extends HttpServlet {
 		String confirmPassword = request.getParameter("confirmPassword");
 		String roleId = request.getParameter("roleId");
 
-		if (type.equals("getAll")) {
+		if(type.equals("login")) {
+			login(request, response, session, loginName, password);
+		} else if(type.equals("logout")) {
+			logout(response, session);
+		} else if (type.equals("getAll")) {
 			getAll(request, response);
 		} else if (type.equals("reg")) {
 			reg(request, response, loginName, realName, password, confirmPassword, roleId);
 		} else if (type.equals("add")) {
 			add(request, response, loginName, realName, password, roleId);
 		}
+	}
+
+	private void logout(HttpServletResponse response, HttpSession session) throws IOException {
+		session.removeAttribute("loginUser");
+		session.invalidate();
+		response.sendRedirect("index.jsp");
+	}
+
+	private void login(HttpServletRequest request, HttpServletResponse response, HttpSession session, String loginName,
+			String password) throws ServletException, IOException {
+		//登录处理
+				SysUser loginUser = this.userService.login(loginName, password);
+				if(loginUser != null) {
+					System.out.println(loginUser.getLoginName());
+					session.setAttribute("loginUser", loginUser);
+					
+//					List<Message> messageList = this.messageService.getAll();
+//					request.setAttribute("messageList", messageList);
+					System.out.println("welcome");
+					request.getRequestDispatcher("/index.jsp").forward(request, response);	
+				}else {
+					response.sendRedirect("login.jsp");
+				}
+		
 	}
 
 	private void add(HttpServletRequest request, HttpServletResponse response, String loginName, String realName,
