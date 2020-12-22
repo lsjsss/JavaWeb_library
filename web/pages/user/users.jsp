@@ -30,7 +30,7 @@
 			<p>
 				<a class="btn btn-success" href="${ctx}/pages/user/adduser.jsp">新增</a>
 			</p>
-			<table class="table table-striped table-hover">
+			<table class="table table-bordered table-hover">
 				<thead>
 					<tr>
 						<th>编号</th>
@@ -59,23 +59,37 @@
 					</c:forEach>
 				</tbody>
 			</table>
+			<nav aria-label="Page navigation" style="text-align: center;">
+				<ul class="pagination">
+					<li><a href="#" aria-label="Previous"> <span
+							aria-hidden="true">&laquo;</span>
+					</a></li>
+					<li><a href="#">1</a></li>
+					<li><a href="#">2</a></li>
+					<li><a href="#">3</a></li>
+					<li><a href="#">4</a></li>
+					<li><a href="#">5</a></li>
+					<li><a href="#" aria-label="Next"> <span
+							aria-hidden="true">&raquo;</span>
+					</a></li>
+				</ul>
+			</nav>
 		</div>
-		<nav aria-label="Page navigation" style="text-align: center;">
-			<ul class="pagination">
-				<li><a href="#" aria-label="Previous"> <span
-						aria-hidden="true">&laquo;</span>
-				</a></li>
-				<li><a href="#">1</a></li>
-				<li><a href="#">2</a></li>
-				<li><a href="#">3</a></li>
-				<li><a href="#">4</a></li>
-				<li><a href="#">5</a></li>
-				<li><a href="#" aria-label="Next"> <span aria-hidden="true">&raquo;</span>
-				</a></li>
-			</ul>
-		</nav>
 	</div>
-	</div>
+	<nav aria-label="Page navigation" style="text-align: center;">
+		<ul class="pagination">
+			<li><a href="#" aria-label="Previous"> <span
+					aria-hidden="true">&laquo;</span>
+			</a></li>
+			<li><a href="#">1</a></li>
+			<li><a href="#">2</a></li>
+			<li><a href="#">3</a></li>
+			<li><a href="#">4</a></li>
+			<li><a href="#">5</a></li>
+			<li><a href="#" aria-label="Next"> <span aria-hidden="true">&raquo;</span>
+			</a></li>
+		</ul>
+	</nav>
 	<!-- 主体内容结束 -->
 	<jsp:include page="/pages/layout/foot.jsp" />
 	<!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->

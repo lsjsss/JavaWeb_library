@@ -29,14 +29,17 @@
 			<table class="table table-bordered table-hover">
 				<thead>
 					<tr>
-						<th>编号</th>
+						<th>编号i</th>
 						<th>书名</th>
 						<th>作者</th>
 						<th>出版社</th>
 						<th>图书数量</th>
 						<th>借出数量</th>
 						<th>剩余数量</th>
-						<th>操作</th>
+						<c:if test="${not empty loginUser}">
+							<th>操作</th>
+						</c:if>
+
 					</tr>
 				</thead>
 				<tbody>
@@ -49,13 +52,17 @@
 							<td>${obj.bookNumbers}</td>
 							<td>${obj.lendedNumber}</td>
 							<td>${obj.bookNumbers - obj.lendedNumber}</td>
-							<td><c:if
-									test="${(not empty loginUser) && ((obj.bookNumbers-obj.lendedNumber) gt 0) }">
-									<a class="btn btn-success btn-sm" href="#">借阅</a>
-								</c:if> <c:if
-									test="${(not empty loginUser) && ((obj.bookNumbers-obj.lendedNumber) le 0)}">
-									<a class="btn btn-danger btn-sm disabled" href="#">不可借阅</a>
-								</c:if></td>
+							<c:if test="${not empty loginUser}">
+								<td><c:if
+										test="${(obj.bookNumbers-obj.lendedNumber) gt 0 }">
+										<a class="btn btn-success btn-sm" href="#">借阅</a>
+									</c:if> <c:if test="${(obj.bookNumbers-obj.lendedNumber) le 0}">
+										<a class="btn btn-danger btn-sm disabled" href="#">不可借阅</a>
+									</c:if> <c:if test="${loginUser.roleId eq 1}">
+										<a class="btn btn-danger btn-sm disabled" href="#">编辑</a>
+										<a class="btn btn-danger btn-sm disabled" href="#">删除</a>
+									</c:if></td>
+							</c:if>
 						</tr>
 					</c:forEach>
 				</tbody>

@@ -53,16 +53,8 @@ public class BookServlet extends HttpServlet {
 		} else if(type.equals("bookManage")) {
 			List<SysBook> bookList = this.bookService.getAll();
 			request.setAttribute("bookList", bookList);
-			request.getRequestDispatcher("/pages/book/books.jsp").forward(request, response);
+			request.getRequestDispatcher("/index.jsp").forward(request, response);
 		}
-		
-		
-		
-		
-		
-		
-		
-		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)

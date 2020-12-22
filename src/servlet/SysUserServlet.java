@@ -11,9 +11,12 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.sj.bms.constant.Constant;
+import com.sj.bms.entity.SysBook;
 import com.sj.bms.entity.SysUser;
+import com.sj.bms.service.ISysBookService;
 import com.sj.bms.service.ISysRoleService;
 import com.sj.bms.service.ISysUserService;
+import com.sj.bms.service.impl.SysBookServiceImpl;
 import com.sj.bms.service.impl.SysRoleServiceImpl;
 import com.sj.bms.service.impl.SysUserServiceImpl;
 
@@ -23,6 +26,7 @@ public class SysUserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	private ISysUserService userService = new SysUserServiceImpl();
+	private ISysBookService bookService = new SysBookServiceImpl();
 	private ISysRoleService roleService = new SysRoleServiceImpl();
 
 	public SysUserServlet() {
@@ -46,10 +50,10 @@ public class SysUserServlet extends HttpServlet {
 		String confirmPassword = request.getParameter("confirmPassword");
 		String roleId = request.getParameter("roleId");
 
-		if(type.equals("login")) {
+		if (type.equals("login")) {
 			login(request, response, session, loginName, password);
-		} else if(type.equals("logout")) {
-			logout(response, session);
+		} else if (type.equals("logout")) {
+			logout(request, response, session);
 		} else if (type.equals("getAll")) {
 			getAll(request, response);
 		} else if (type.equals("reg")) {
@@ -59,7 +63,8 @@ public class SysUserServlet extends HttpServlet {
 		}
 	}
 
-	private void logout(HttpServletResponse response, HttpSession session) throws IOException {
+	private void logout(HttpServletRequest request, HttpServletResponse response, HttpSession session)
+			throws IOException, ServletException {
 		session.removeAttribute("loginUser");
 		session.invalidate();
 		response.sendRedirect("index.jsp");
@@ -67,20 +72,17 @@ public class SysUserServlet extends HttpServlet {
 
 	private void login(HttpServletRequest request, HttpServletResponse response, HttpSession session, String loginName,
 			String password) throws ServletException, IOException {
-		//登录处理
-				SysUser loginUser = this.userService.login(loginName, password);
-				if(loginUser != null) {
-					System.out.println(loginUser.getLoginName());
-					session.setAttribute("loginUser", loginUser);
-					
-//					List<Message> messageList = this.messageService.getAll();
-//					request.setAttribute("messageList", messageList);
-					System.out.println("welcome");
-					request.getRequestDispatcher("/index.jsp").forward(request, response);	
-				}else {
-					response.sendRedirect("login.jsp");
-				}
-		
+		// 登录处理
+		SysUser loginUser = this.userService.login(loginName, password);
+		if (loginUser != null) {
+			System.out.println(loginUser.getLoginName());
+			session.setAttribute("loginUser", loginUser);
+			List<SysBook> bookList = this.bookService.getAll();
+			request.setAttribute("bookList", bookList);
+			request.getRequestDispatcher("/index.jsp").forward(request, response);
+		} else {
+			response.sendRedirect("login.jsp");
+		}
 	}
 
 	private void add(HttpServletRequest request, HttpServletResponse response, String loginName, String realName,
