@@ -20,7 +20,7 @@ public class DBTools {
 	static String driver = "com.mysql.jdbc.Driver";
 	// 2 数据库的连接串
 	// String url = "jdbc:mysql://localhost:3306/guestbook";
-	static String url = "jdbc:mysql://127.0.0.1:3306/minilibrary?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+	static String url = "jdbc:mysql://127.0.0.1:3306/library?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
 	// 3 用户名
 	static String user = "root";
 	// 4 密码

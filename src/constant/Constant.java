@@ -1,4 +1,5 @@
 package constant;
+
 public class Constant {
 	public final static String USER_ADMIN="管理员";
 	public final static String USER_TEACHER="教师";
