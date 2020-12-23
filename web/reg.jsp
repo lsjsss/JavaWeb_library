@@ -35,7 +35,7 @@
 	<jsp:include page="/pages/layout/head.jsp" />
 	<!-- 主体内容开始 -->
 	<div class="container bs-docs-container">
-		<div class="col-md-6"></div>
+		<div class="col-md-4"></div>
 		<div class="row col-md-6">
 			<form method="post" action="${ctx}/user.do?type=reg"
 				class="form-horizontal">
@@ -45,12 +45,22 @@
 						<input class="form-control" id="loginName" name="loginName"
 							placeholder="username">
 					</div>
+					<div class="col-sm-5">
+						<c:if test="${isSuccess1 eq 1}">
+							<label for="text" class="control-label">${reg1}</label>
+						</c:if>
+					</div>
 				</div>
 				<div class="form-group">
 					<label for="realName" class="col-sm-2 control-label">真实姓名</label>
 					<div class="col-sm-5">
 						<input class="form-control" id="realName" name="realName"
 							placeholder="name">
+					</div>
+					<div class="col-sm-5">
+						<c:if test="${isSuccess2 eq 2}">
+							<label for="text" class="control-label">${reg2}</label>
+						</c:if>
 					</div>
 				</div>
 				<div class="form-group">
@@ -62,6 +72,11 @@
 							<option value="2">教师</option>
 						</select>
 					</div>
+					<div class="col-sm-5">
+						<c:if test="${isSuccess3 eq 3}">
+							<label for="text" class="control-label">${reg3}</label>
+						</c:if>
+					</div>
 				</div>
 				<div class="form-group">
 					<label for="password" class="col-sm-2 control-label">密&ensp;&ensp;&ensp;&ensp;码
@@ -70,6 +85,11 @@
 						<input type="password" class="form-control" id="password"
 							name="password" placeholder="password">
 					</div>
+					<div class="col-sm-5">
+						<c:if test="${isSuccess4 eq 4}">
+							<label for="text" class="control-label">${reg4}</label>
+						</c:if>
+					</div>
 				</div>
 				<div class="form-group">
 					<label for="confirmPassword" class="col-sm-2 control-label">确认密码</label>
@@ -77,13 +97,24 @@
 						<input type="password" class="form-control" id="confirmPassword"
 							name="confirmPassword" placeholder="password">
 					</div>
+					<div class="col-sm-5">
+						<c:if test="${isSuccess5 eq 5}">
+							<label for="text" class="control-label">${reg5}</label>
+						</c:if>
+					</div>
 				</div>
 				<div class="form-group">
-					<label for="confirmPassword" class="col-sm-5 control-label"></label>
+					<label for="submit" class="col-sm-5 control-label"></label>
 					<div class="col-sm-2">
 						<button type="submit" class="btn btn-default">注册</button>
 					</div>
+					<div class="col-sm-5">
+						<c:if test="${isSuccess eq 0}">
+							<label for="text" class="control-label">${reg}</label>
+						</c:if>
+					</div>
 				</div>
+				
 			</form>
 		</div>
 		<div class="col-md-1"></div>

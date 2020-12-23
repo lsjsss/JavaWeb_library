@@ -57,7 +57,7 @@ public class SysUserServlet extends HttpServlet {
 		} else if (type.equals("getAll")) {
 			getAll(request, response);
 		} else if (type.equals("reg")) {
-			reg(request, response, loginName, realName, password, confirmPassword, roleId);
+			reg(request, response, session, loginName, realName, password, confirmPassword, roleId);
 		} else if (type.equals("add")) {
 			add(request, response, loginName, realName, password, roleId);
 		}
@@ -91,22 +91,22 @@ public class SysUserServlet extends HttpServlet {
 		boolean isSuccess = false;
 		if (!flag) {
 			if (loginName.equals("")) {
-				request.setAttribute("msg", "添加用户失败，用户名不能为空！");
+				request.setAttribute("reg", "添加用户失败，用户名不能为空！");
 			} else {
 				if (realName.equals("")) {
-					request.setAttribute("msg", "添加用户失败，真实姓名不能为空！");
+					request.setAttribute("reg", "添加用户失败，真实姓名不能为空！");
 				} else {
 					if (roleId.equals("")) {
-						request.setAttribute("msg", "添加用户失败，请选择用户属性！");
+						request.setAttribute("reg", "添加用户失败，请选择用户属性！");
 					} else {
-						request.setAttribute("msg", "添加用户成功！");
+						request.setAttribute("reg", "添加用户成功！");
 						isSuccess = true;
 						this.userService.add(loginName, realName, Constant.DEFAULT_PASSWORD, roleId);
 					}
 				}
 			}
 		} else {
-			request.setAttribute("msg", "注册失败,存在同名用户！");
+			request.setAttribute("reg", "注册失败,存在同名用户！");
 		}
 
 		// 跳转
@@ -118,47 +118,133 @@ public class SysUserServlet extends HttpServlet {
 
 	}
 
-	private void reg(HttpServletRequest request, HttpServletResponse response, String loginName, String realName,
-			String password, String confirmPassword, String roleId) throws ServletException, IOException {
+	private void reg(HttpServletRequest request, HttpServletResponse response, HttpSession session, String loginName,
+			String realName, String password, String confirmPassword, String roleId)
+			throws ServletException, IOException {
 		boolean flag = this.userService.isExits(loginName);
-		boolean isSuccess = false;
-		if (!flag) {
+
+		//////////////////////////////////////////
+
+//		if (!flag) {
+		//新版登录
+		if (flag || loginName.equals("") || realName.equals("") || roleId.equals("") || password.equals("")
+				|| password.length() < 8 || confirmPassword.equals("") || (password.equals(confirmPassword) == false)) {
 			if (loginName.equals("")) {
-				request.setAttribute("msg", "注册失败，用户名不能为空！");
-			} else {
-				if (realName.equals("")) {
-					request.setAttribute("msg", "注册失败，真实姓名不能为空！");
+				request.setAttribute("reg1", "用户名不能为空！");
+				request.setAttribute("isSuccess1", 1);
+			}
+			if (flag) {
+				request.setAttribute("reg1", "存在同名用户，请更换用户名！");
+				request.setAttribute("isSuccess1", 1);
+			}
+			if (realName.equals("")) {
+				request.setAttribute("reg2", "真实姓名不能为空！");
+				request.setAttribute("isSuccess2", 2);
+			}
+			if (roleId.equals("")) {
+				request.setAttribute("reg3", "请选择用户属性！");
+				request.setAttribute("isSuccess3", 3);
+			}
+			if (password.equals("")) {
+				request.setAttribute("reg4", "请输入密码！");
+				request.setAttribute("isSuccess4", 4);
+			} else if (password.length() < 8) {
+				request.setAttribute("reg4", "密码长度应大于或等于8位！");
+				request.setAttribute("isSuccess4", 4);
+			}
+			if (confirmPassword.equals("")) {
+				request.setAttribute("reg5", "请确认密码！");
+				request.setAttribute("isSuccess5", 5);
+			} else if (password.equals(confirmPassword) == false) {
+				if (password.equals("")) {
+					request.setAttribute("reg5", "请先输入密码！");
+					request.setAttribute("isSuccess5", 5);
 				} else {
-					if (roleId.equals("")) {
-						request.setAttribute("msg", "注册失败，请选择用户属性！");
-					} else {
-						if (password.equals("")) {
-							request.setAttribute("msg", "注册失败，请输入密码！");
-						} else {
-							if (confirmPassword.equals("")) {
-								request.setAttribute("msg", "注册失败，请确认密码！");
-							} else {
-								if (password.equals(confirmPassword)) {
-									request.setAttribute("msg", "注册成功！");
-									isSuccess = true;
-									this.userService.add(loginName, realName, password, roleId);
-								} else {
-									request.setAttribute("msg", "注册失败，两次输入的密码不一致！");
-								}
-							}
-						}
-					}
+					request.setAttribute("reg5", "两次输入的密码不一致！");
+					request.setAttribute("isSuccess5", 5);
 				}
 			}
 		} else {
-			request.setAttribute("msg", "注册失败,存在同名用户！");
+			request.setAttribute("reg", "注册成功！");
+			request.setAttribute("isSuccess", 0);
+//									isSuccess = true;
+			this.userService.add(loginName, realName, password, roleId);
+
+			// 自动登录
+			SysUser loginUser = this.userService.login(loginName, password);
+			System.out.println(loginUser.getLoginName());
+			session.setAttribute("loginUser", loginUser);
+
+			// 跳转到图书列表
+			List<SysBook> bookList = this.bookService.getAll();
+			request.setAttribute("bookList", bookList);
+			request.getRequestDispatcher("/index.jsp").forward(request, response);
 		}
-		// 跳转
-		if (isSuccess) {
-			request.getRequestDispatcher("/regsuccessresult.jsp").forward(request, response);
-		} else {
-			request.getRequestDispatcher("/regloseresult.jsp").forward(request, response);
-		}
+
+//		}
+
+		///////////////////////////////////////////////////////////////////////
+//旧版登录
+//		if (!flag) {
+//			 if (loginName.equals("")) {
+//				request.setAttribute("reg", "注册失败，用户名不能为空！");
+//				request.setAttribute("isSuccess", 1);
+//			} else {
+//				if (realName.equals("")) {
+//					request.setAttribute("reg", "注册失败，真实姓名不能为空！");
+//					request.setAttribute("isSuccess", 2);
+//				} else {
+//					if (roleId.equals("")) {
+//						request.setAttribute("reg", "注册失败，请选择用户属性！");
+//						request.setAttribute("isSuccess", 3);
+//					} else {
+//						if (password.equals("")) {
+//							request.setAttribute("reg", "注册失败，请输入密码！");
+//							request.setAttribute("isSuccess", 4);
+//						} else {
+//							if (confirmPassword.equals("")) {
+//								request.setAttribute("reg", "注册失败，请确认密码！");
+//								request.setAttribute("isSuccess", 5);
+//							} else {
+//								if (password.equals(confirmPassword)) {
+//									request.setAttribute("reg", "注册成功！");
+//									request.setAttribute("isSuccess", 0);
+////									isSuccess = true;
+//									this.userService.add(loginName, realName, password, roleId);
+//									
+//									//自动登录
+//									SysUser loginUser = this.userService.login(loginName, password);
+//									System.out.println(loginUser.getLoginName());
+//									session.setAttribute("loginUser", loginUser);
+//									
+//									//跳转到图书列表
+//									List<SysBook> bookList = this.bookService.getAll();
+//									request.setAttribute("bookList", bookList);
+//									request.getRequestDispatcher("/index.jsp").forward(request, response);
+//								} else {
+//									request.setAttribute("reg", "注册失败，两次输入的密码不一致！");
+//									request.getRequestDispatcher("/reg.jsp").forward(request, response);
+//								}
+//							}
+//						}
+//					}
+//				}
+//			}
+//		} 
+//		
+
+//		else {
+//			request.setAttribute("reg", "注册失败,存在同名用户！");
+////			request.getRequestDispatcher("/reg.jsp").forward(request, response);
+//		}
+		request.getRequestDispatcher("/reg.jsp").forward(request, response);
+		System.out.println(1);
+//		// 跳转
+//		if (isSuccess) {
+//			request.getRequestDispatcher("/regsuccessresult.jsp").forward(request, response);
+//		} else {
+//			request.getRequestDispatcher("/regloseresult.jsp").forward(request, response);
+//		}
 	}
 
 	private void getAll(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
