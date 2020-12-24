@@ -26,10 +26,15 @@
 	<!-- 主题内容开始 -->
 	<div class="container bs-docs-container">
 		<div class="row">
+			<c:if test="${loginUser.roleId eq 1}">
+				<p>
+					<a class="btn btn-success" href="${ctx}/pages/role/addbook.jsp">新增</a>
+				</p>
+			</c:if>
 			<table class="table table-bordered table-hover">
 				<thead>
 					<tr>
-						<th>编号i</th>
+						<th>编号</th>
 						<th>书名</th>
 						<th>作者</th>
 						<th>出版社</th>
@@ -57,10 +62,10 @@
 										test="${(obj.bookNumbers-obj.lendedNumber) gt 0 }">
 										<a class="btn btn-success btn-sm" href="#">借阅</a>
 									</c:if> <c:if test="${(obj.bookNumbers-obj.lendedNumber) le 0}">
-										<a class="btn btn-danger btn-sm disabled" href="#">不可借阅</a>
+										<a class="btn btn-danger btn-sm disabled" href="">不可借阅</a>
 									</c:if> <c:if test="${loginUser.roleId eq 1}">
-										<a class="btn btn-danger btn-sm disabled" href="#">编辑</a>
-										<a class="btn btn-danger btn-sm disabled" href="#">删除</a>
+										<a class="btn btn-danger btn-sm" href="${ctx}/book.do?type=get&id=${obj.id}">编辑</a>
+										<a class="btn btn-warning btn-sm" href="${ctx}/book.do?type=delete&id=${obj.id}" onclick="return confirm('确实要删除编号为 【 ${obj.id}】 的记录吗?');">删除</a>
 									</c:if></td>
 							</c:if>
 						</tr>

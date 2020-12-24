@@ -8,4 +8,8 @@ public interface ISysBookDao {
 
 	List<SysBook> getAll();
 
+	SysBook get(int id);
+
+	int edit(SysBook book);
+
 }

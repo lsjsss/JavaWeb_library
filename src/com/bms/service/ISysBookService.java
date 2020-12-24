@@ -8,4 +8,8 @@ public interface ISysBookService {
 
 	List<SysBook> getAll();
 
+	SysBook get(String id);
+
+	int edit(String id, String bookName, String author, String publisher, int bookNumbers);
+
 }

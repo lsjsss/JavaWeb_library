@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
-    <title>图书管理系统-编辑角色</title>
+    <title>图书管理系统-操作结果</title>
 
     <!-- Bootstrap -->
     <link href="${ctx}/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -27,24 +27,16 @@
     <!-- 页面导航结束 -->
     
     <!-- 页面主体部分开始 -->
+    <!-- 页面主体部分开始 -->
     <div class="row" style="width:100%">
     	<div class="col-md-2"></div>
 	    <div class="bs-docs-section col-md-8"> 
-	    	<form method="post" action="${ctx}/role.do?type=edit">
-	    	  <input type="hidden" name="id" id="id" value="${role.id}">
-			  <div class="form-group">
-			    <label for="roleName">角色名称</label>
-			    <input type="text" class="form-control" name="roleName" id="roleName" value="${role.roleName}" placeholder="请输入角色名称">
-			  </div>
-			  <div class="form-group">
-			    <label for="remark">角色描述</label>
-			    <input type="text" class="form-control" name="remark" id="remark" value="${role.remark }" placeholder="角色描述信息">
-			  </div>
-			  <button type="submit" class="btn btn-default">修改</button>
-			</form>	    	
+	    	<h3>${msg}</h3>
+    		<a class="btn btn-default" href="${ctx}/book.do?type=getAll">返回</a>	
 		</div>
 		<div class="col-md-2"></div>
 	</div>	
+    <!-- 页面主体部分结束 -->
     <!-- 页面主体部分结束 -->
     
     <!-- 页脚部分开始 -->
@@ -58,3 +50,18 @@
     <script src="${ctx}/bootstrap/js/docs.min.js"></script>
   </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

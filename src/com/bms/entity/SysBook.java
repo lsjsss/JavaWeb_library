@@ -41,6 +41,15 @@ public class SysBook implements Serializable{
 		this.bookNumbers = bookNumbers;
 		this.lendedNumber = lendedNumber;
 	}
+	
+	public SysBook(int id, String bookName, String author, String publisher, int bookNumbers) {
+		super();
+		this.id = id;
+		this.bookName = bookName;
+		this.author = author;
+		this.publisher = publisher;
+		this.bookNumbers = bookNumbers;
+	}
 
 	public int getId() {
 		return id;

@@ -2,6 +2,7 @@ package com.bms.servlet;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,6 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.bms.entity.SysBook;
+import com.bms.entity.SysRole;
+import com.bms.entity.SysUser;
 import com.bms.service.ISysBookService;
 import com.bms.service.impl.SysBookServiceImpl;
 
@@ -42,19 +45,81 @@ public class BookServlet extends HttpServlet {
 		String bookName = request.getParameter("bookName");
 		String author = request.getParameter("author");
 		String publisher = request.getParameter("publisher");
-//		int bookNumbers = Integer.valueOf(request.getParameter("bookNumbers"));
-//		int lendedNumber = Integer.valueOf(request.getParameter("lendedNumber"));
-//		int reaminNumber = bookNumbers - lendedNumber;
 		
 		if(type.equals("getAll")) {
-			List<SysBook> bookList = this.bookService.getAll();
-			request.setAttribute("bookList", bookList);
-			request.getRequestDispatcher("/index.jsp").forward(request, response);
+			getAll(request, response);
 		} else if(type.equals("bookManage")) {
+			getAll(request, response);
+		} else if(type.equals("get")) {
+			get(request, response, id);
+		} else if(type.equals("edit")) {
+			int bookNumbers = Integer.valueOf(request.getParameter("bookNumbers"));
+			edit(request, response, id, bookName, author, publisher, bookNumbers);
+		}
+	}
+
+	private void getAll(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		List<SysBook> bookList = this.bookService.getAll();
+		request.setAttribute("bookList", bookList);
+		request.getRequestDispatcher("/index.jsp").forward(request, response);
+	}
+
+	private void edit(HttpServletRequest request, HttpServletResponse response, String id, String bookName,
+			String author, String publisher, int bookNumbers) throws ServletException, IOException {
+		//用于判断是否为整型数据
+		Pattern pattern = Pattern.compile("^[-\\+]?[\\d]*$");
+		if (bookName.equals("") || author.equals("")||
+				publisher.equals("") || (bookNumbers+"").equals("")
+				|| (!pattern.matcher(bookNumbers+"").matches())
+				) {
+			if (bookName.equals("")) {
+				request.setAttribute("reg1", "书名不能为空！");
+				request.setAttribute("isSuccess1", 1);
+			}
+			if (author.equals("")) {
+				request.setAttribute("reg2", "作者不能为空！");
+				request.setAttribute("isSuccess2", 2);
+			}
+			if (publisher.equals("")) {
+				request.setAttribute("reg3", "出版社不能为空！");
+				request.setAttribute("isSuccess3", 3);
+			}
+			if ((bookNumbers+"").equals("")) {
+				request.setAttribute("reg4", "图书数量不能为空！");
+				request.setAttribute("isSuccess4", 4);
+			} else if(!pattern.matcher(bookNumbers+"").matches()) {
+				request.setAttribute("reg4", "请输入合法数据！");
+				request.setAttribute("isSuccess4", 4);
+			}
+			get(request, response, id);
+		} else {
+			int ret = this.bookService.edit(id, bookName, author, publisher, bookNumbers);
+			request.setAttribute("reg", "编辑成功！");
+			request.setAttribute("isSuccess", 0);
+			
+			
+			// 跳转到图书列表
 			List<SysBook> bookList = this.bookService.getAll();
 			request.setAttribute("bookList", bookList);
 			request.getRequestDispatcher("/index.jsp").forward(request, response);
 		}
+		
+//		request.getRequestDispatcher("/pages/book/editbook.jsp").forward(request, response);
+//		get(request, response, id);
+		
+		
+		
+		
+		
+		//跳转
+//		request.getRequestDispatcher("/pages/book/bookresult.jsp").forward(request, response);
+	}
+
+	private void get(HttpServletRequest request, HttpServletResponse response, String id) throws ServletException, IOException {
+		SysBook book = this.bookService.get(id);
+		request.setAttribute("book", book);
+		//跳转
+		request.getRequestDispatcher("/pages/book/editbook.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
