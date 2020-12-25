@@ -53,8 +53,7 @@ public class BookServlet extends HttpServlet {
 		} else if(type.equals("get")) {
 			get(request, response, id);
 		} else if(type.equals("edit")) {
-			int bookNumbers = Integer.valueOf(request.getParameter("bookNumbers"));
-			edit(request, response, id, bookName, author, publisher, bookNumbers);
+			edit(request, response, id, bookName, author, publisher, request.getParameter("bookNumbers"));
 		}
 	}
 
@@ -65,7 +64,7 @@ public class BookServlet extends HttpServlet {
 	}
 
 	private void edit(HttpServletRequest request, HttpServletResponse response, String id, String bookName,
-			String author, String publisher, int bookNumbers) throws ServletException, IOException {
+			String author, String publisher, String bookNumbers) throws ServletException, IOException {
 		//用于判断是否为整型数据
 		Pattern pattern = Pattern.compile("^[-\\+]?[\\d]*$");
 		if (bookName.equals("") || author.equals("")||
@@ -84,16 +83,17 @@ public class BookServlet extends HttpServlet {
 				request.setAttribute("reg3", "出版社不能为空！");
 				request.setAttribute("isSuccess3", 3);
 			}
-			if ((bookNumbers+"").equals("")) {
+			if (bookNumbers.equals("")) {
 				request.setAttribute("reg4", "图书数量不能为空！");
 				request.setAttribute("isSuccess4", 4);
-			} else if(!pattern.matcher(bookNumbers+"").matches()) {
+			} else if(!pattern.matcher(bookNumbers).matches()) {
 				request.setAttribute("reg4", "请输入合法数据！");
 				request.setAttribute("isSuccess4", 4);
 			}
 			get(request, response, id);
 		} else {
-			int ret = this.bookService.edit(id, bookName, author, publisher, bookNumbers);
+			int ibookNumbers = Integer.valueOf(request.getParameter("bookNumbers"));
+			int ret = this.bookService.edit(id, bookName, author, publisher, ibookNumbers);
 			request.setAttribute("reg", "编辑成功！");
 			request.setAttribute("isSuccess", 0);
 			

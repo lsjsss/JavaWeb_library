@@ -42,9 +42,8 @@ public class SysBookDaoImpl extends BaseDaoImpl<SysBook> implements ISysBookDao 
 	@Override
 	public int edit(SysBook sysBook) {
 		int ret = -1;
-		String sql = "update sys_book set bookName=?,author=? ,publisher=?,bookNumbers=? where id=?";
+		String sql = "update sys_book set bookName=?, author=? ,publisher=?,bookNumbers=? where id=?";
 		Object[] params = new Object[] {sysBook.getBookName(), sysBook.getAuthor(), sysBook.getPublisher(), sysBook.getBookNumbers(), sysBook.getId()};
-		
 		try {
 			ret = super.update(conn, sql, params);
 		} catch (SQLException e1) {
