@@ -13,6 +13,8 @@
 .mtj.tmp/
 
 # Package Files #
+*.jar
+*.war
 *.nar
 *.ear
 *.zip
@@ -22,7 +24,3 @@
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 
-out/artifacts/library_war_exploded/WEB-INF/lib/
-web/WEB-INF/lib/jstl-1.2.jar
-web/WEB-INF/lib/mysql-connector-java-5.1.38.jar
-web/WEB-INF/lib/standard-1.1.2.jar
