@@ -1,4 +1,4 @@
-package com.bms.dao.impl;
+package com.bms.impl;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.List;
 
 import com.bms.dao.ISysBookDao;
+import com.bms.dao.impl.BaseDaoImpl;
 import com.bms.entity.SysBook;
 import com.bms.entity.SysRole;
 import com.bms.utils.DBTools;

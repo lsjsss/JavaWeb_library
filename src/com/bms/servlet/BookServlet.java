@@ -45,6 +45,7 @@ public class BookServlet extends HttpServlet {
 		String bookName = request.getParameter("bookName");
 		String author = request.getParameter("author");
 		String publisher = request.getParameter("publisher");
+		String bookNumbers = request.getParameter("bookNumbers");
 		
 		if(type.equals("getAll")) {
 			getAll(request, response);
@@ -54,7 +55,41 @@ public class BookServlet extends HttpServlet {
 			get(request, response, id);
 		} else if(type.equals("edit")) {
 			edit(request, response, id, bookName, author, publisher, request.getParameter("bookNumbers"));
+		}else if(type.equals("add")) {
+			add(request, response, bookName, author, publisher, bookNumbers);
+		}else if(type.equals("delete")) {
+			delete(request, response, id);
 		}
+	}
+
+	private void delete(HttpServletRequest request, HttpServletResponse response, String id)
+			throws ServletException, IOException {
+		int ret = this.bookService.delete(id);
+		if(ret == 1) {
+			request.setAttribute("msg", "删除成功！");
+		}else {
+			request.setAttribute("msg", "删除失败！");
+		}
+		//跳转
+		request.getRequestDispatcher("/pages/book/bookresult.jsp").forward(request, response);
+	}
+
+	private void add(HttpServletRequest request, HttpServletResponse response, String bookName, String author,
+			String publisher, String bookNumbers) throws ServletException, IOException {
+		//添加角色
+		SysBook book = this.bookService.getSysRoleByRoleName(bookName);
+		if(book == null) {
+			int newId = this.bookService.add(bookName,author,publisher,bookNumbers);
+			if(newId>0) {
+				request.setAttribute("msg", "添加成功！");
+			}else {
+				request.setAttribute("msg", "添加失败！");				
+			}
+		}else {
+			request.setAttribute("msg", "添加失败，图书已经存在！");		
+		}			
+		//跳转
+		request.getRequestDispatcher("/pages/book/bookresult.jsp").forward(request, response);
 	}
 
 	private void getAll(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

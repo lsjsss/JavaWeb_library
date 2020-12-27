@@ -28,7 +28,7 @@
 		<div class="row">
 			<c:if test="${loginUser.roleId eq 1}">
 				<p>
-					<a class="btn btn-success" href="${ctx}/pages/role/addbook.jsp">新增</a>
+					<a class="btn btn-success" href="${ctx}/pages/book/addbook.jsp">新增</a>
 				</p>
 			</c:if>
 			<table class="table table-bordered table-hover">
@@ -60,7 +60,7 @@
 							<c:if test="${not empty loginUser}">
 								<td><c:if
 										test="${(obj.bookNumbers-obj.lendedNumber) gt 0 }">
-										<a class="btn btn-success btn-sm" href="#">借阅</a>
+										<a class="btn btn-success btn-sm" href="${ctx}/lend.do?type=lend&id=${obj.id}">借阅</a>
 									</c:if> <c:if test="${(obj.bookNumbers-obj.lendedNumber) le 0}">
 										<a class="btn btn-danger btn-sm disabled" href="">不可借阅</a>
 									</c:if> <c:if test="${loginUser.roleId eq 1}">

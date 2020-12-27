@@ -14,4 +14,6 @@ public interface ISysUserDao {
 
 	List<SysUser> getAll();
 
+	SysUser get(int id);
+
 }

@@ -14,5 +14,7 @@ public interface ISysUserService {
 
 	List<SysUser> getAll();
 
+	SysUser get(String id);
+
 
 }

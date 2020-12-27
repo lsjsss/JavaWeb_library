@@ -1,4 +1,4 @@
-package com.bms.dao.impl;
+package com.bms.impl;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -8,6 +8,7 @@ import java.sql.Statement;
 import java.util.List;
 
 import com.bms.dao.ISysUserDao;
+import com.bms.dao.impl.BaseDaoImpl;
 import com.bms.entity.SysRole;
 import com.bms.entity.SysUser;
 import com.bms.utils.DBTools;

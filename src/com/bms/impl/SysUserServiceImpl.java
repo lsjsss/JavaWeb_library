@@ -1,4 +1,4 @@
-package com.bms.service.impl;
+package com.bms.impl;
 
 import java.util.List;
 

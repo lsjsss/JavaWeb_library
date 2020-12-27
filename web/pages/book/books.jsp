@@ -29,7 +29,7 @@
 			<table class="table table-bordered table-hover">
 				<thead>
 					<tr>
-						<th>编号b</th>
+						<th>编号</th>
 						<th>书名</th>
 						<th>作者</th>
 						<th>出版社</th>
