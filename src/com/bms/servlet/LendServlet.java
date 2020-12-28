@@ -39,21 +39,24 @@ public class LendServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 
 		String type = request.getParameter("type");
-		String id = request.getParameter("id");
-		String userId = request.getParameter("userId");
-		String bookId = request.getParameter("bookId");
+		String bookId = request.getParameter("id");
+		String userId = (String) session.getAttribute("id");
+//		String userId = request.getParameter("userId");
+//		String bookId = request.getParameter("bookId");
 		String lendId = request.getParameter("lendId");
 
 		if (type.equals("lend")) {
+			System.out.println(bookId + " " + userId);
+			
 //				if(!id.equals("")&&id!=null) {
 //					SysUser user = userService.get(id);
 //					if(user==null) {
 //						request.setAttribute("msg","用户不存在");
 //					}else {
-			this.bookService.lend(id);
+			this.bookService.lend(bookId);
 			this.bookService.addLend(userId, bookId);
 			//跳转
-			request.getRequestDispatcher("/pages/book/mylend.jsp").forward(request, response);
+//			request.getRequestDispatcher("/pages/book/mylend.jsp").forward(request, response);
 
 		}
 	}

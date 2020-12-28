@@ -109,7 +109,7 @@ public class SysBookDaoImpl extends BaseDaoImpl<SysBook> implements ISysBookDao 
 	public int addLend(int userId, int bookId) {
 		int ret = -1;
 		String sql = "insert into sys_lend(userId,bookId,lendDate,estimateReturnDate,actualDeturnDate,status)values(?,?,?,?,?,?)";
-		Object[] params = new Object[] {userId,bookId,0,0, 0,00};
+		Object[] params = new Object[] {userId,bookId,"2020-12-28","2020-12-28", "2020-12-28",00};
 		try {
 			ret = super.insert(conn, sql, params);
 		} catch (SQLException e1) {

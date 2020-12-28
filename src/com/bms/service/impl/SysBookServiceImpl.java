@@ -54,6 +54,8 @@ public class SysBookServiceImpl implements ISysBookService {
 
 	@Override
 	public int addLend(String userId, String bookId) {
+		System.out.println(bookId);
+		System.out.println("SysBookServiceImpl"+Integer.valueOf(bookId));
 		return this.bookDao.addLend(Integer.valueOf(userId), Integer.valueOf(bookId));
 	}
 

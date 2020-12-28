@@ -76,20 +76,36 @@ public class BookServlet extends HttpServlet {
 
 	private void add(HttpServletRequest request, HttpServletResponse response, String bookName, String author,
 			String publisher, String bookNumbers) throws ServletException, IOException {
-		//添加角色
+		//添加图书
 		SysBook book = this.bookService.getSysRoleByRoleName(bookName);
-		if(book == null) {
-			int newId = this.bookService.add(bookName,author,publisher,bookNumbers);
-			if(newId>0) {
-				request.setAttribute("msg", "添加成功！");
-			}else {
-				request.setAttribute("msg", "添加失败！");				
+		if (bookName.equals("") || author.equals("") || publisher.equals("") || bookNumbers.equals("")) {
+			if (bookName.equals("")) {
+				request.setAttribute("reg1", "书名不能为空！");
+				request.setAttribute("isSuccess1", 1);
 			}
-		}else {
-			request.setAttribute("msg", "添加失败，图书已经存在！");		
-		}			
-		//跳转
-		request.getRequestDispatcher("/pages/book/bookresult.jsp").forward(request, response);
+			if (author.equals("")) {
+				request.setAttribute("reg2", "作者不能为空！");
+				request.setAttribute("isSuccess2", 2);
+			}
+			if (publisher.equals("")) {
+				request.setAttribute("reg3", "出版社不能为空！");
+				request.setAttribute("isSuccess3", 3);
+			}
+			if (bookNumbers.equals("")) {
+				request.setAttribute("reg4", "图书数量不能为空！");
+				request.setAttribute("isSuccess4", 4);
+			}
+			request.getRequestDispatcher("/pages/book/addbook.jsp").forward(request, response);
+		} else {
+			request.setAttribute("reg", "添加成功！");
+			request.setAttribute("isSuccess", 0);
+			this.bookService.add(bookName,author,publisher,bookNumbers);
+			
+			// 跳转到图书列表
+			List<SysBook> bookList = this.bookService.getAll();
+			request.setAttribute("bookList", bookList);
+			request.getRequestDispatcher("/index.jsp").forward(request, response);
+		}
 	}
 
 	private void getAll(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

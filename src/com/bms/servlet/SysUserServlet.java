@@ -248,7 +248,7 @@ public class SysUserServlet extends HttpServlet {
 	}
 
 	private void getAll(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 获取所有角色
+		// 获取所有用户
 		List<SysUser> userList = this.userService.getAll();
 		request.setAttribute("userList", userList);
 		request.getRequestDispatcher("/pages/user/users.jsp").forward(request, response);

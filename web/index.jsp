@@ -44,7 +44,6 @@
 						<c:if test="${not empty loginUser}">
 							<th>操作</th>
 						</c:if>
-
 					</tr>
 				</thead>
 				<tbody>
@@ -64,8 +63,8 @@
 									</c:if> <c:if test="${(obj.bookNumbers-obj.lendedNumber) le 0}">
 										<a class="btn btn-danger btn-sm disabled" href="">不可借阅</a>
 									</c:if> <c:if test="${loginUser.roleId eq 1}">
-										<a class="btn btn-danger btn-sm" href="${ctx}/book.do?type=get&id=${obj.id}">编辑</a>
-										<a class="btn btn-warning btn-sm" href="${ctx}/book.do?type=delete&id=${obj.id}" onclick="return confirm('确实要删除编号为 【 ${obj.id}】 的记录吗?');">删除</a>
+										<a class="btn btn-warning btn-sm" href="${ctx}/book.do?type=get&id=${obj.id}">编辑</a>
+										<a class="btn btn-danger btn-sm" href="${ctx}/book.do?type=delete&id=${obj.id}" onclick="return confirm('确实要删除  ${obj.id} ${obj.bookName} ${obj.author} 这本书吗?');">删除</a>
 									</c:if></td>
 							</c:if>
 						</tr>
