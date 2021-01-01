@@ -4,6 +4,82 @@
 
 
 
+---
+
+## 2021.01.01
+
+### 新增功能
+
+- 编辑、删除用户
+
+- 图书归还
+
+- 我的借阅
+
+- 解决了为登录访问管理员页面的问题
+
+- 新增欢迎界面
+
+- 优化页面UI
+
+  ![avatar](http://p.ananas.chaoxing.com/star3/origin/c52d6ff584c72dfecd7e74aa8004b8f3.jpg)
+
+![avatar](http://p.ananas.chaoxing.com/star3/origin/4c97ee604bdd7f26781cfba06653cf5b.jpg)
+
+![avatar](http://p.ananas.chaoxing.com/star3/origin/5a2b0e4e1f9be1cb347ff79c1e38f628.jpg)
+
+![avatar](http://p.ananas.chaoxing.com/star3/origin/751ea00f38f627626a8e0160ef5fa187.jpg)
+
+![avatar](http://p.ananas.chaoxing.com/star3/origin/f4ceaf43d707228fa5c982a60ac2eaee.jpg)
+
+![avatar](http://p.ananas.chaoxing.com/star3/origin/20364b84278f0840cfbe01d586719d1a.jpg)
+
+![avatar](http://p.ananas.chaoxing.com/star3/origin/f805cf44a0e590b65358345cbed3b976.jpg)
+
+![avatar](http://p.ananas.chaoxing.com/star3/origin/08e2c04e5dd70e531587e64d5fa04f24.jpg)
+
+![avatar](http://p.ananas.chaoxing.com/star3/origin/fa7e2ac9f936c04acedd42bb889e3851.jpg)
+
+![avatar](http://p.ananas.chaoxing.com/star3/origin/9bee15df462e08b7fcf98f817f9971bb.jpg)
+
+
+
+
+
+
+
+
+
+### 已实现功能
+
+图书借阅
+
+管理员新增、删除图书
+
+编辑、删除用户
+
+图书归还
+
+我的借阅
+
+
+
+### 待实现功能
+
+搜索图书
+
+
+
+### 待完善功能
+
+无待完善功能
+
+
+
+### 待解决问题
+
+登陆时验证用户输入的账号或密码不正确时没有提示
+
 
 
 ---
