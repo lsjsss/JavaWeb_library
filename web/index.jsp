@@ -9,8 +9,25 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
-<title>图书管理系统</title>
-
+<title>图书管理系统 - 图书列表</title>
+<style type="text/css">
+.linear {
+	width: 100%;
+	height: 100%;
+	FILTER: progid:DXImageTransform.Microsoft.Gradient(gradientType=0,
+		startColorStr=#5faddb, endColorStr=#fafafa); /*IE*/
+	background: -moz-linear-gradient(top, #5faddb, #fafafa); /*火狐*/
+	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#5faddb),
+		to(#fafafa)); /*谷歌*/
+	background-image: -webkit-gradient(linear, left bottom, left top, color-start(0, #5faddb),
+		color-stop(1, #fafafa)); /* Safari & Chrome*/
+	filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,
+		startColorstr='#5faddb', endColorstr='#fafafa'); /*IE6 & IE7*/
+	-ms-filter:
+		"progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#5faddb', endColorstr='#fafafa')";
+	/* IE8 */
+}
+</style>
 <!-- Bootstrap -->
 <link href="${ctx}/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
@@ -21,11 +38,12 @@
       <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
     <![endif]-->
 </head>
-<body>
+<body class="linear">
 	<jsp:include page="/pages/layout/head.jsp" />
 	<!-- 主题内容开始 -->
 	<div class="container bs-docs-container">
 		<div class="row">
+			<h3 style="text-align: center;">图书列表</h3>
 			<c:if test="${loginUser.roleId eq 1}">
 				<p>
 					<a class="btn btn-success" href="${ctx}/pages/book/addbook.jsp">新增</a>
@@ -59,12 +77,17 @@
 							<c:if test="${not empty loginUser}">
 								<td><c:if
 										test="${(obj.bookNumbers-obj.lendedNumber) gt 0 }">
-										<a class="btn btn-success btn-sm" href="${ctx}/lend.do?type=lend&id=${obj.id}">借阅</a>
+										<input type="hidden" name="id" id="id" value="${user.id}">
+										<a class="btn btn-success btn-sm"
+											href="${ctx}/lend.do?type=lend&bookId=${obj.id}&userId=${loginUser.id}&roleId=${loginUser.roleId}">借阅</a>
 									</c:if> <c:if test="${(obj.bookNumbers-obj.lendedNumber) le 0}">
 										<a class="btn btn-danger btn-sm disabled" href="">不可借阅</a>
 									</c:if> <c:if test="${loginUser.roleId eq 1}">
-										<a class="btn btn-warning btn-sm" href="${ctx}/book.do?type=get&id=${obj.id}">编辑</a>
-										<a class="btn btn-danger btn-sm" href="${ctx}/book.do?type=delete&id=${obj.id}" onclick="return confirm('确实要删除  ${obj.id} ${obj.bookName} ${obj.author} 这本书吗?');">删除</a>
+										<a class="btn btn-warning btn-sm"
+											href="${ctx}/book.do?type=get&id=${obj.id}">编辑</a>
+										<a class="btn btn-danger btn-sm"
+											href="${ctx}/book.do?type=delete&id=${obj.id}"
+											onclick="return confirm('确实要删除  ${obj.id} ${obj.bookName} ${obj.author} 这本书吗?');">删除</a>
 									</c:if></td>
 							</c:if>
 						</tr>

@@ -9,8 +9,25 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
-<title>图书管理系统-图书管理</title>
-
+<title>图书管理系统 - 图书管理</title>
+<style type="text/css">
+.linear {
+	width: 100%;
+	height: 100%;
+	FILTER: progid:DXImageTransform.Microsoft.Gradient(gradientType=0,
+		startColorStr=#5faddb, endColorStr=#fafafa); /*IE*/
+	background: -moz-linear-gradient(top, #5faddb, #fafafa); /*火狐*/
+	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#5faddb),
+		to(#fafafa)); /*谷歌*/
+	background-image: -webkit-gradient(linear, left bottom, left top, color-start(0, #5faddb),
+		color-stop(1, #fafafa)); /* Safari & Chrome*/
+	filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,
+		startColorstr='#5faddb', endColorstr='#fafafa'); /*IE6 & IE7*/
+	-ms-filter:
+		"progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#5faddb', endColorstr='#fafafa')";
+	/* IE8 */
+}
+</style>
 <!-- Bootstrap -->
 <link href="${ctx}/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
@@ -21,56 +38,62 @@
       <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
     <![endif]-->
 </head>
-<body>
+<body class="linear">
 	<jsp:include page="/pages/layout/head.jsp" />
 	<!-- 主题内容开始 -->
 	<div class="container bs-docs-container">
-		<div class="row">
-			<table class="table table-bordered table-hover">
-				<thead>
-					<tr>
-						<th>编号</th>
-						<th>书名</th>
-						<th>作者</th>
-						<th>出版社</th>
-						<th>图书数量</th>
-						<th>借出数量</th>
-						<th>剩余数量</th>
-						<th>操作</th>
-					</tr>
-				</thead>
-				<tbody>
-					<c:forEach items="${bookList}" var="obj">
+		<h3 style="text-align: center;">图书列表</h3>
+		<c:if test="${not empty loginUser}">
+			<div class="row">
+				<table class="table table-bordered table-hover">
+					<thead>
 						<tr>
-							<th scope="row">${obj.id}</th>
-							<td>${obj.bookName}</td>
-							<td>${obj.author}</td>
-							<td>${obj.publisher}</td>
-							<td>${obj.bookNumbers}</td>
-							<td>${obj.lendedNumber}</td>
-							<td>${obj.bookNumbers - obj.lendedNumber}</td>
-							<td><a class="btn btn-success btn-sm" href="#">编辑</a> <a
-								class="btn btn-danger btn-sm disabled" href="#">删除</a></td>
+							<th>编号</th>
+							<th>书名</th>
+							<th>作者</th>
+							<th>出版社</th>
+							<th>图书数量</th>
+							<th>借出数量</th>
+							<th>剩余数量</th>
+							<th>操作</th>
 						</tr>
-					</c:forEach>
-				</tbody>
-			</table>
-			<nav aria-label="Page navigation" style="text-align: center;">
-				<ul class="pagination">
-					<li><a href="#" aria-label="Previous"> <span
-							aria-hidden="true">&laquo;</span>
-					</a></li>
-					<li><a href="#">1</a></li>
-					<li><a href="#">2</a></li>
-					<li><a href="#">3</a></li>
-					<li><a href="#">4</a></li>
-					<li><a href="#">5</a></li>
-					<li><a href="#" aria-label="Next"> <span
-							aria-hidden="true">&raquo;</span>
-					</a></li>
-				</ul>
-			</nav>
-		</div>
+					</thead>
+					<tbody>
+						<c:forEach items="${bookList}" var="obj">
+							<tr>
+								<th scope="row">${obj.id}</th>
+								<td>${obj.bookName}</td>
+								<td>${obj.author}</td>
+								<td>${obj.publisher}</td>
+								<td>${obj.bookNumbers}</td>
+								<td>${obj.lendedNumber}</td>
+								<td>${obj.bookNumbers - obj.lendedNumber}</td>
+								<td><a class="btn btn-success btn-sm" href="#">编辑</a> <a
+									class="btn btn-danger btn-sm disabled" href="#">删除</a></td>
+							</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+				<nav aria-label="Page navigation" style="text-align: center;">
+					<ul class="pagination">
+						<li><a href="#" aria-label="Previous"> <span
+								aria-hidden="true">&laquo;</span>
+						</a></li>
+						<li><a href="#">1</a></li>
+						<li><a href="#">2</a></li>
+						<li><a href="#">3</a></li>
+						<li><a href="#">4</a></li>
+						<li><a href="#">5</a></li>
+						<li><a href="#" aria-label="Next"> <span
+								aria-hidden="true">&raquo;</span>
+						</a></li>
+					</ul>
+				</nav>
+			</div>
+		</c:if>
+		<c:if test="${empty loginUser}">
+			<h3 style="text-align: center; color: red;">非法访问！</h3>
+		</c:if>
 	</div>
 	<!-- 主体内容结束 -->
 	<jsp:include page="/pages/layout/foot.jsp" />

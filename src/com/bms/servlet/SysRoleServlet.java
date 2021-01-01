@@ -1,6 +1,7 @@
 package com.bms.servlet;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -8,8 +9,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
+import com.bms.constant.Constant;
 import com.bms.entity.SysRole;
 import com.bms.service.ISysRoleService;
 import com.bms.service.impl.SysRoleServiceImpl;
@@ -31,9 +32,7 @@ public class SysRoleServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		response.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=utf-8");
-		
-		HttpSession session = request.getSession();
-		
+				
 		//获取参数
 		String type = request.getParameter("type");
 		String id = request.getParameter("id");
@@ -58,9 +57,10 @@ public class SysRoleServlet extends HttpServlet {
 			String description) throws ServletException, IOException {
 		int ret = this.roleService.edit(id,roleName,description);
 		if(ret == 1) {
-			request.setAttribute("msg", "编辑成功！");
+			request.setAttribute("msg", "编辑角色成功！");
+			System.out.println(Constant.TIME.format(new Date()) + "管理员修改角色 -- 角色id:" + id + "; 角色名称:" +roleName);
 		}else {
-			request.setAttribute("msg", "编辑失败！");
+			request.setAttribute("msg", "编辑橘角色失败！");
 		}
 		//跳转
 		request.getRequestDispatcher("/pages/role/roleresult.jsp").forward(request, response);
@@ -79,6 +79,7 @@ public class SysRoleServlet extends HttpServlet {
 		int ret = this.roleService.delete(id);
 		if(ret == 1) {
 			request.setAttribute("msg", "删除成功！");
+			System.out.println(Constant.TIME.format(new Date()) + "管理员删除角色 -- 角色id:" + id);
 		}else {
 			request.setAttribute("msg", "删除失败！");
 		}
@@ -94,6 +95,7 @@ public class SysRoleServlet extends HttpServlet {
 			int newId = this.roleService.add(roleName, description);
 			if(newId>0) {
 				request.setAttribute("msg", "添加成功！");
+				System.out.println(Constant.TIME.format(new Date()) + "管理员添加角色 -- 角色名称" + roleName);
 			}else {
 				request.setAttribute("msg", "添加失败！");				
 			}

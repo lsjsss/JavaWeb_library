@@ -23,7 +23,7 @@ public class ReflectionUtils {
 	 * @param index
 	 * @return
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings("rawtypes")
 	public static Class getSuperClassGenricType(Class clazz, int index) {
 		Type genType = clazz.getGenericSuperclass();
 
@@ -52,7 +52,7 @@ public class ReflectionUtils {
 	 * @param clazz
 	 * @return
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public static <T> Class<T> getSuperGenericType(Class clazz) {
 		return getSuperClassGenricType(clazz, 0);
 	}

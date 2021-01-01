@@ -44,7 +44,7 @@
 								class="sr-only">(current)</span></a></li>
 						<li><a href="${ctx}/role.do?type=getAll">角色管理 <span
 								class="sr-only">(current)</span></a></li>
-						<li><a href="${ctx}/book.do?type=bookManage">图书管理 <span
+						<li><a href="${ctx}/lend.do?type=alllend&roleId=${loginUser.roleId}&userId=${loginUser.id}">借阅管理 <span
 								class="sr-only">(current)</span></a></li>
 					</ul>
 				</c:if>
@@ -58,16 +58,15 @@
 				</form>
 				<ul class="nav navbar-nav navbar-right">
 					<c:if test="${empty loginUser}">
+						<li><a class="disabled">访客用户</a></li>
 						<li><a href="${ctx}/reg.jsp">注册</a></li>
-						<li><a href="${ctx}/login.jsp">登录</a></li>
+						<li><a href="${ctx}/welcome.jsp">登录</a></li>
 					</c:if>
 					<c:if test="${not empty loginUser}">
 						<!-- <li class="dropdown"> -->
-						<li><a id="loginedUser" href="#" class="dropdown-toggle"
-							data-toggle="dropdown" role="button" aria-haspopup="true"
-							aria-expanded="false">欢迎您，${loginUser.realName}</a></li>
+						<li><a  class="disabled">欢迎您，${loginUser.realName}</a></li>
 						<!-- <ul class="dropdown-menu"> -->
-						<li><a href="${ctx}/pages/book/mylend.jsp">我的借阅</a></li>
+						<li><a href="${ctx}/lend.do?type=mylend&userId=${loginUser.id}">我的借阅</a></li>
 						<li><a href="${ctx}/user.do?type=logout">注销</a></li>
 					</c:if>
 				</ul>

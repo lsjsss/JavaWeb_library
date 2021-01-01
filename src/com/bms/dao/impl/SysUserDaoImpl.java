@@ -8,7 +8,6 @@ import java.sql.Statement;
 import java.util.List;
 
 import com.bms.dao.ISysUserDao;
-import com.bms.entity.SysRole;
 import com.bms.entity.SysUser;
 import com.bms.utils.DBTools;
 
@@ -91,6 +90,32 @@ public class SysUserDaoImpl extends BaseDaoImpl<SysUser> implements ISysUserDao 
 			e.printStackTrace();
 		}
 		return user;
+	}
+
+	@Override
+	public int edit(SysUser sysUser) {
+		int ret = -1;
+		String sql = "update sys_user set loginName=?, realName=? where id=?";
+		Object[] params = new Object[] {sysUser.getLoginName(), sysUser.getRealName(), sysUser.getId()};
+		try {
+			ret = super.update(conn, sql, params);
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+		return ret;
+	}
+
+	@Override
+	public int delete(int id) {
+		int ret = -1;
+		String sql = "delete from sys_user where id = ?";
+		Object[] params = new Object[] {id};
+		try {
+			ret = super.update(conn, sql, params);
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+		return ret;
 	}
 	
 }

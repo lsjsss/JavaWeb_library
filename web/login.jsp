@@ -9,7 +9,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
-<title>图书管理系统-用户登录</title>
+<title>图书管理系统 - 欢迎</title>
 <!-- Bootstrap -->
 <link href="${ctx}/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 <!-- HTML5 shim 和 Respond.js 是为了让 IE8 支持 HTML5 元素和媒体查询（media queries）功能 -->

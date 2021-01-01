@@ -3,7 +3,6 @@ package com.bms.dao;
 import java.util.List;
 
 import com.bms.entity.SysBook;
-import com.bms.entity.SysRole;
 
 public interface ISysBookDao {
 
@@ -21,7 +20,10 @@ public interface ISysBookDao {
 
 	int lend(int id);
 
-	int addLend(int userId, int bookId);
+	int addLend(int userId, int roleId, int bookId);
 
+	int returnBook(int bookId);
 
+	int returnLend(int lendId, int userId, int bookId);
+	
 }

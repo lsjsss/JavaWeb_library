@@ -1,6 +1,7 @@
 package com.bms.servlet;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -14,10 +15,8 @@ import com.bms.constant.Constant;
 import com.bms.entity.SysBook;
 import com.bms.entity.SysUser;
 import com.bms.service.ISysBookService;
-import com.bms.service.ISysRoleService;
 import com.bms.service.ISysUserService;
 import com.bms.service.impl.SysBookServiceImpl;
-import com.bms.service.impl.SysRoleServiceImpl;
 import com.bms.service.impl.SysUserServiceImpl;
 
 @WebServlet("/user.do")
@@ -27,7 +26,6 @@ public class SysUserServlet extends HttpServlet {
 
 	private ISysUserService userService = new SysUserServiceImpl();
 	private ISysBookService bookService = new SysBookServiceImpl();
-	private ISysRoleService roleService = new SysRoleServiceImpl();
 
 	public SysUserServlet() {
 		super();
@@ -44,6 +42,7 @@ public class SysUserServlet extends HttpServlet {
 
 		// 获取参数
 		String type = request.getParameter("type");
+		String id = request.getParameter("id");
 		String loginName = request.getParameter("loginName");
 		String realName = request.getParameter("realName");
 		String password = request.getParameter("password");
@@ -60,14 +59,81 @@ public class SysUserServlet extends HttpServlet {
 			reg(request, response, session, loginName, realName, password, confirmPassword, roleId);
 		} else if (type.equals("add")) {
 			add(request, response, loginName, realName, password, roleId);
+		} else if (type.equals("edit")) {
+			edit(request, response, id, loginName, realName);
+		} else if (type.equals("get")) {
+			get(request, response, id);
+		} else if (type.equals("delete")) {
+			delete(request, response, id);
+		}
+	}
+
+	private void delete(HttpServletRequest request, HttpServletResponse response, String id)
+			throws ServletException, IOException {
+		int ret = this.userService.delete(id);
+		boolean isSuccess = false;
+		if (ret == 1) {
+			request.setAttribute("msg", "删除成功！");
+			System.out.println(Constant.TIME.format(new Date()) + "管理员删除用户 -- 用户id:" + id);
+			isSuccess = true;
+		} else {
+			request.setAttribute("msg", "删除失败！");
+		}
+		// 跳转
+		if (isSuccess) {
+			request.getRequestDispatcher("/pages/user/usersuccessresult.jsp").forward(request, response);
+		} else {
+			request.getRequestDispatcher("/pages/user/userloseresult.jsp").forward(request, response);
+		}
+	}
+
+	private void get(HttpServletRequest request, HttpServletResponse response, String id)
+			throws ServletException, IOException {
+		SysUser user = this.userService.get(id);
+		if(id.equals("1") || id.equals("2") || id.equals("3")) {
+			// 跳转到用户列表
+			getAll(request, response);
+		} else {
+			request.setAttribute("user", user);
+			// 跳转
+			request.getRequestDispatcher("/pages/user/edituser.jsp").forward(request, response);
+		}
+	}
+
+	private void edit(HttpServletRequest request, HttpServletResponse response, String id, String loginName,
+			String realName) throws ServletException, IOException {
+		// 用于判断是否为整型数据
+		if (loginName.equals("") || realName.equals("")) {
+			if (loginName.equals("")) {
+				request.setAttribute("reg1", "账号不能为空！");
+				request.setAttribute("isSuccess1", 1);
+			}
+			if (realName.equals("")) {
+				request.setAttribute("reg2", "姓名不能为空！");
+				request.setAttribute("isSuccess2", 2);
+			}
+			get(request, response, id);
+		} else {
+			this.userService.edit(id, loginName, realName);
+			request.setAttribute("reg", "编辑成功！");
+			request.setAttribute("isSuccess", 0);
+			System.out.println(
+					Constant.TIME.format(new Date()) + "管理员修改用户信息 -- 用户名: " + loginName + "; 真实姓名:" + realName);
+
+			// 跳转到用户列表
+			getAll(request, response);
 		}
 	}
 
 	private void logout(HttpServletRequest request, HttpServletResponse response, HttpSession session)
 			throws IOException, ServletException {
+		System.out.println(Constant.TIME.format(new Date()) + "用户登出　--" + session.getAttribute("loginUser"));
 		session.removeAttribute("loginUser");
 		session.invalidate();
-		response.sendRedirect("index.jsp");
+
+		List<SysBook> bookList = this.bookService.getAll();
+		request.setAttribute("bookList", bookList);
+		request.getRequestDispatcher("/index.jsp").forward(request, response);
 	}
 
 	private void login(HttpServletRequest request, HttpServletResponse response, HttpSession session, String loginName,
@@ -75,8 +141,9 @@ public class SysUserServlet extends HttpServlet {
 		// 登录处理
 		SysUser loginUser = this.userService.login(loginName, password);
 		if (loginUser != null) {
-			System.out.println(loginUser.getLoginName());
 			session.setAttribute("loginUser", loginUser);
+			System.out.println(Constant.TIME.format(new Date()) + "用户登录 -- 用户名:" + loginUser.getLoginName());
+
 			List<SysBook> bookList = this.bookService.getAll();
 			request.setAttribute("bookList", bookList);
 			request.getRequestDispatcher("/index.jsp").forward(request, response);
@@ -101,6 +168,8 @@ public class SysUserServlet extends HttpServlet {
 					} else {
 						request.setAttribute("reg", "添加用户成功！");
 						isSuccess = true;
+						System.out.println(Constant.TIME.format(new Date()) + "管理员添加用户 -- 用户名:" + loginName + "; 姓名:"
+								+ realName + "; 用户类型" + roleId);
 						this.userService.add(loginName, realName, Constant.DEFAULT_PASSWORD, roleId);
 					}
 				}
@@ -123,10 +192,7 @@ public class SysUserServlet extends HttpServlet {
 			throws ServletException, IOException {
 		boolean flag = this.userService.isExits(loginName);
 
-		//////////////////////////////////////////
-
-//		if (!flag) {
-		//新版登录
+		// 新版登录
 		if (flag || loginName.equals("") || realName.equals("") || roleId.equals("") || password.equals("")
 				|| password.length() < 8 || confirmPassword.equals("") || (password.equals(confirmPassword) == false)) {
 			if (loginName.equals("")) {
@@ -167,21 +233,19 @@ public class SysUserServlet extends HttpServlet {
 		} else {
 			request.setAttribute("reg", "注册成功！");
 			request.setAttribute("isSuccess", 0);
-//									isSuccess = true;
 			this.userService.add(loginName, realName, password, roleId);
 
 			// 自动登录
 			SysUser loginUser = this.userService.login(loginName, password);
-			System.out.println(loginUser.getLoginName());
 			session.setAttribute("loginUser", loginUser);
+			System.out.println(Constant.TIME.format(new Date()) + "新注册用户 -- 用户名:" + loginUser.getLoginName() + "; 姓名:"
+					+ loginUser.getRealName() + "; 用户类型:" + loginUser.getRoleId());
 
 			// 跳转到图书列表
 			List<SysBook> bookList = this.bookService.getAll();
 			request.setAttribute("bookList", bookList);
 			request.getRequestDispatcher("/index.jsp").forward(request, response);
 		}
-
-//		}
 
 		///////////////////////////////////////////////////////////////////////
 //旧版登录
@@ -231,20 +295,11 @@ public class SysUserServlet extends HttpServlet {
 //				}
 //			}
 //		} 
-//		
-
 //		else {
 //			request.setAttribute("reg", "注册失败,存在同名用户！");
 ////			request.getRequestDispatcher("/reg.jsp").forward(request, response);
 //		}
-		request.getRequestDispatcher("/reg.jsp").forward(request, response);
-		System.out.println(1);
-//		// 跳转
-//		if (isSuccess) {
-//			request.getRequestDispatcher("/regsuccessresult.jsp").forward(request, response);
-//		} else {
-//			request.getRequestDispatcher("/regloseresult.jsp").forward(request, response);
-//		}
+//		request.getRequestDispatcher("/reg.jsp").forward(request, response);
 	}
 
 	private void getAll(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -258,5 +313,4 @@ public class SysUserServlet extends HttpServlet {
 			throws ServletException, IOException {
 		doGet(request, response);
 	}
-
 }

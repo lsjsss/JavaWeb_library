@@ -16,4 +16,8 @@ public interface ISysUserDao {
 
 	SysUser get(int id);
 
+	int edit(SysUser user);
+
+	int delete(int id);
+
 }

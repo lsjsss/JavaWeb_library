@@ -7,7 +7,6 @@ import com.bms.dao.ISysRoleDao;
 import com.bms.dao.ISysUserDao;
 import com.bms.dao.impl.SysRoleDaoImpl;
 import com.bms.dao.impl.SysUserDaoImpl;
-import com.bms.entity.SysRole;
 import com.bms.entity.SysUser;
 import com.bms.service.ISysUserService;
 
@@ -36,7 +35,7 @@ public class SysUserServiceImpl implements ISysUserService {
 		List<SysUser> list = this.userDao.getAll();
 		
 		for(SysUser user : list) {
-			SysRole role = this.roleDao.get(user.getRoleId());
+			this.roleDao.get(user.getRoleId());
 			if(user.getRoleId()==1) {
 				user.setValue(Constant.USER_ADMIN);
 			} else if(user.getRoleId()==2) {
@@ -51,6 +50,17 @@ public class SysUserServiceImpl implements ISysUserService {
 	@Override
 	public SysUser get(String id) {
 		return this.userDao.get(Integer.valueOf(id));
+	}
+
+	@Override
+	public int edit(String id, String loginName, String realName) {
+		SysUser user = new SysUser(Integer.valueOf(id), loginName, realName);
+		return this.userDao.edit(user);
+	}
+
+	@Override
+	public int delete(String id) {
+		return this.userDao.delete(Integer.valueOf(id));
 	}
 
 }

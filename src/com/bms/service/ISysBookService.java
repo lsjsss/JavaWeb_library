@@ -3,7 +3,6 @@ package com.bms.service;
 import java.util.List;
 
 import com.bms.entity.SysBook;
-import com.bms.entity.SysRole;
 
 public interface ISysBookService {
 
@@ -21,7 +20,10 @@ public interface ISysBookService {
 
 	int lend(String id);
 
-	int addLend(String userId, String bookId);
+	int addLend(String userId, String roleId, String bookId);
 
+	int returnBook(String bookId);
+
+	int returnLend(String lendId, String userId, String bookId);
 
 }

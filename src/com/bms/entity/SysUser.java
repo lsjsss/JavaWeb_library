@@ -27,8 +27,14 @@ public class SysUser implements Serializable{
 	public SysUser() {
 		super();
 	}
-
-
+	
+	public SysUser(int id, String loginName, String realName) {
+		super();
+		this.id = id;
+		this.loginName = loginName;
+		this.realName = realName;
+	}
+	
 	public SysUser(String loginName, String realName, String password, int roleId, int maxLendNumber, int maxLendDays) {
 		super();
 		this.loginName = loginName;

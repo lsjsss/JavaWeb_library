@@ -16,5 +16,9 @@ public interface ISysUserService {
 
 	SysUser get(String id);
 
+	int edit(String id, String loginName, String realName);
+
+	int delete(String id);
+
 
 }

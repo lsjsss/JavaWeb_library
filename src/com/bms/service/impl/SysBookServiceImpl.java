@@ -3,11 +3,8 @@ package com.bms.service.impl;
 import java.util.List;
 
 import com.bms.dao.ISysBookDao;
-import com.bms.dao.ISysUserDao;
 import com.bms.dao.impl.SysBookDaoImpl;
-import com.bms.dao.impl.SysUserDaoImpl;
 import com.bms.entity.SysBook;
-import com.bms.entity.SysRole;
 import com.bms.service.ISysBookService;
 
 public class SysBookServiceImpl implements ISysBookService {
@@ -53,10 +50,18 @@ public class SysBookServiceImpl implements ISysBookService {
 	}
 
 	@Override
-	public int addLend(String userId, String bookId) {
-		System.out.println(bookId);
-		System.out.println("SysBookServiceImpl"+Integer.valueOf(bookId));
-		return this.bookDao.addLend(Integer.valueOf(userId), Integer.valueOf(bookId));
+	public int addLend(String userId, String roleId, String bookId) {
+		return this.bookDao.addLend(Integer.valueOf(userId), Integer.valueOf(roleId), Integer.valueOf(bookId));
+	}
+
+	@Override
+	public int returnBook(String bookId) {
+		return this.bookDao.returnBook(Integer.valueOf(bookId));
+	}
+
+	@Override
+	public int returnLend(String lendId, String userId, String bookId) {
+		return this.bookDao.returnLend(Integer.valueOf(lendId), Integer.valueOf(userId), Integer.valueOf(bookId));
 	}
 
 }
