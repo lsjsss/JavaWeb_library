@@ -32,8 +32,11 @@ CREATE TABLE `sys_book` (
 -- ----------------------------
 -- Records of sys_book
 -- ----------------------------
-INSERT INTO `sys_book` VALUES ('1', '第一本书', 'author1', 'PKU', '10', '5');
-INSERT INTO `sys_book` VALUES ('2', '第二本书', 'author2', 'PKU', '5', '5');
+INSERT INTO `sys_book` VALUES (1, '第一本书', '作者1', 'PUP', 10, 4);
+INSERT INTO `sys_book` VALUES (2, '第二本书', 'author2', 'PUP', 5, 5);
+INSERT INTO `sys_book` VALUES (3, '第三本书', '作者3', 'NKU', 15, 2);
+INSERT INTO `sys_book` VALUES (4, '第四本书', '作者4', 'NKU', 20, 2);
+INSERT INTO `sys_book` VALUES (5, '第五本书', '作者5', 'NKU', 5, 5);
 -- ----------------------------
 -- Table structure for sys_lend
 -- ----------------------------
@@ -52,7 +55,33 @@ CREATE TABLE `sys_lend` (
 -- ----------------------------
 -- Records of sys_lend
 -- ----------------------------
-
+INSERT INTO `sys_lend` VALUES (6, 1, 1, '2021-1-2', '2021-7-1', '2021-1-2', '11');
+INSERT INTO `sys_lend` VALUES (7, 2, 5, '2021-1-2', '2021-4-2', NULL, '0');
+INSERT INTO `sys_lend` VALUES (8, 3, 2, '2021-1-2', '2021-7-1', NULL, '0');
+INSERT INTO `sys_lend` VALUES (9, 4, 3, '2021-1-2', '2021-4-2', NULL, '0');
+INSERT INTO `sys_lend` VALUES (10, 6, 3, '2021-1-2', '2021-7-1', NULL, '0');
+INSERT INTO `sys_lend` VALUES (11, 5, 4, '2021-1-2', '2021-7-1', NULL, '0');
+INSERT INTO `sys_lend` VALUES (12, 2, 4, '2021-1-2', '2021-4-2', '2021-1-2', '11');
+INSERT INTO `sys_lend` VALUES (13, 2, 1, '2021-1-2', '2021-4-2', NULL, '0');
+INSERT INTO `sys_lend` VALUES (14, 2, 2, '2021-1-2', '2021-4-2', NULL, '0');
+INSERT INTO `sys_lend` VALUES (15, 4, 3, '2021-1-2', '2021-4-2', '2021-1-2', '11');
+INSERT INTO `sys_lend` VALUES (16, 4, 2, '2021-1-2', '2021-4-2', NULL, '0');
+INSERT INTO `sys_lend` VALUES (17, 4, 5, '2021-1-2', '2021-4-2', NULL, '0');
+INSERT INTO `sys_lend` VALUES (18, 6, 2, '2021-1-2', '2021-7-1', NULL, '0');
+INSERT INTO `sys_lend` VALUES (19, 6, 1, '2021-1-2', '2021-7-1', '2021-1-2', '11');
+INSERT INTO `sys_lend` VALUES (20, 6, 5, '2021-1-2', '2021-7-1', NULL, '0');
+INSERT INTO `sys_lend` VALUES (21, 3, 2, '2021-1-2', '2021-7-1', '2021-1-2', '11');
+INSERT INTO `sys_lend` VALUES (22, 3, 1, '2021-1-2', '2021-7-1', NULL, '0');
+INSERT INTO `sys_lend` VALUES (23, 1, 1, '2021-1-2', '2021-7-1', NULL, '0');
+INSERT INTO `sys_lend` VALUES (24, 1, 5, '2021-1-2', '2021-7-1', NULL, '0');
+INSERT INTO `sys_lend` VALUES (25, 5, 1, '2021-1-2', '2021-7-1', NULL, '0');
+INSERT INTO `sys_lend` VALUES (26, 5, 5, '2021-1-2', '2021-7-1', NULL, '0');
+INSERT INTO `sys_lend` VALUES (27, 1, 2, '2021-1-2', '2021-7-1', NULL, '0');
+INSERT INTO `sys_lend` VALUES (28, 11, 4, '2021-1-2', '2021-4-2', NULL, '0');
+INSERT INTO `sys_lend` VALUES (29, 11, 3, '2021-1-2', '2021-4-2', NULL, '0');
+INSERT INTO `sys_lend` VALUES (30, 11, 3, '2021-1-2', '2021-4-2', '2021-1-2', '11');
+INSERT INTO `sys_lend` VALUES (31, 11, 3, '2021-1-2', '2021-4-2', '2021-1-2', '11');
+INSERT INTO `sys_lend` VALUES (32, 1, 3, '2021-1-2', '2021-7-1', NULL, '0');
 -- ----------------------------
 -- Table structure for sys_role
 -- ----------------------------
@@ -89,6 +118,9 @@ CREATE TABLE `sys_user` (
 -- ----------------------------
 -- Records of sys_user
 -- ----------------------------
-INSERT INTO `sys_user` VALUES ('1', 'admin', 'Tom', '123456', '1', '10', '180');
-INSERT INTO `sys_user` VALUES ('2', 'student', 'student1', '123456', '3', '5', '90');
-INSERT INTO `sys_user` VALUES ('3', 'teacher', 'teacher2', '123456', '2', '10', '180');
+INSERT INTO `sys_user` VALUES (1, 'admin', '管理员测试用户', '123456', 1, 10, 180);
+INSERT INTO `sys_user` VALUES (2, 'student', '学生测试用户', '123456', 3, 5, 90);
+INSERT INTO `sys_user` VALUES (3, 'teacher', '教师测试用户', '123456', 2, 10, 180);
+INSERT INTO `sys_user` VALUES (4, 'student2', '学生2', '123456', 3, 5, 90);
+INSERT INTO `sys_user` VALUES (5, 'admin2', '管理员2', '123456', 1, 5, 90);
+INSERT INTO `sys_user` VALUES (6, 'teacher2', '教师2', '123456', 2, 10, 180);
