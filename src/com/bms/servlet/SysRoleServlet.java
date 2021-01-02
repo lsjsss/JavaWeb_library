@@ -56,23 +56,31 @@ public class SysRoleServlet extends HttpServlet {
 
 	private void edit(HttpServletRequest request, HttpServletResponse response, String id, String roleName,
 			String description) throws ServletException, IOException {
-		int ret = this.roleService.edit(id, roleName, description);
-		if (ret == 1) {
-			request.setAttribute("msg", "编辑角色成功！");
-			System.out.println(Constant.TIME.format(new Date()) + "管理员修改角色 -- 角色id:" + id + "; 角色名称:" + roleName);
+		if (id.equals("1")) {
+			request.getRequestDispatcher("/pages/role/roles.jsp").forward(request, response);
 		} else {
-			request.setAttribute("msg", "编辑橘角色失败！");
+			int ret = this.roleService.edit(id, roleName, description);
+			if (ret == 1) {
+				request.setAttribute("msg", "编辑角色成功！");
+				System.out.println(Constant.TIME.format(new Date()) + "管理员修改角色 -- 角色id:" + id + "; 角色名称:" + roleName);
+			} else {
+				request.setAttribute("msg", "编辑橘角色失败！");
+			}
+			// 跳转
+			request.getRequestDispatcher("/pages/role/roleresult.jsp").forward(request, response);
 		}
-		// 跳转
-		request.getRequestDispatcher("/pages/role/roleresult.jsp").forward(request, response);
 	}
 
 	private void get(HttpServletRequest request, HttpServletResponse response, String id)
 			throws ServletException, IOException {
-		SysRole role = this.roleService.get(id);
-		request.setAttribute("role", role);
-		// 跳转
-		request.getRequestDispatcher("/pages/role/editrole.jsp").forward(request, response);
+		if (id.equals("1")) {
+			request.getRequestDispatcher("/pages/role/roles.jsp").forward(request, response);
+		} else {
+			SysRole role = this.roleService.get(id);
+			request.setAttribute("role", role);
+			// 跳转
+			request.getRequestDispatcher("/pages/role/editrole.jsp").forward(request, response);
+		}
 	}
 
 	private void delete(HttpServletRequest request, HttpServletResponse response, String id)
