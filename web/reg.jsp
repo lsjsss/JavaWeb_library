@@ -19,7 +19,6 @@
 	-webkit-border-radius: 2px;
 	border-radius: 2px;
 }
-
 body {
 	background-image:
 		url("https://img-blog.csdnimg.cn/20210101185241248.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM0MDEyOQ==,size_16,color_FFFFFF,t_70#pic_center");
