@@ -4,6 +4,64 @@
 
 
 
+
+
+---
+
+## 2021.01.02（项目预结束）
+
+### 新增功能
+
+- 修复了服务器中运行mysql时报错无法解析ip地址的问题
+- 新增搜索图书功能
+- 修复了访客非法删除管理员角色
+- 增加了限制删除指定测试用户的功能
+- 增加了后台可查看用户操作记录的功能
+
+
+
+![avatar](https://img-blog.csdnimg.cn/20210102161623865.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM0MDEyOQ==,size_16,color_FFFFFF,t_70)
+
+![avatar](https://img-blog.csdnimg.cn/20210102161623858.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM0MDEyOQ==,size_16,color_FFFFFF,t_70)
+
+![avator](https://img-blog.csdnimg.cn/2021010216404451.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM0MDEyOQ==,size_16,color_FFFFFF,t_70#pic_center)
+
+
+
+### 已实现功能
+
+图书借阅
+
+管理员新增、删除图书
+
+编辑、删除用户
+
+图书归还
+
+我的借阅
+
+搜索图书
+
+
+
+### 待实现功能
+
+无新增待实现功能
+
+
+
+### 待完善功能
+
+无新增待完善功能
+
+
+
+### 待解决问题
+
+无新增待解决问题
+
+
+
 ---
 
 ## 2021.01.01
@@ -41,12 +99,6 @@
 ![avatar](http://p.ananas.chaoxing.com/star3/origin/fa7e2ac9f936c04acedd42bb889e3851.jpg)
 
 ![avatar](http://p.ananas.chaoxing.com/star3/origin/9bee15df462e08b7fcf98f817f9971bb.jpg)
-
-
-
-
-
-
 
 
 
