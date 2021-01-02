@@ -90,7 +90,7 @@ public class SysUserServlet extends HttpServlet {
 	private void get(HttpServletRequest request, HttpServletResponse response, String id)
 			throws ServletException, IOException {
 		SysUser user = this.userService.get(id);
-		if(id.equals("1") || id.equals("2") || id.equals("3")) {
+		if (id.equals("1") || id.equals("2") || id.equals("3")) {
 			// 跳转到用户列表
 			getAll(request, response);
 		} else {
@@ -138,17 +138,32 @@ public class SysUserServlet extends HttpServlet {
 
 	private void login(HttpServletRequest request, HttpServletResponse response, HttpSession session, String loginName,
 			String password) throws ServletException, IOException {
-		// 登录处理
-		SysUser loginUser = this.userService.login(loginName, password);
-		if (loginUser != null) {
-			session.setAttribute("loginUser", loginUser);
-			System.out.println(Constant.TIME.format(new Date()) + "用户登录 -- 用户名:" + loginUser.getLoginName());
-
-			List<SysBook> bookList = this.bookService.getAll();
-			request.setAttribute("bookList", bookList);
-			request.getRequestDispatcher("/index.jsp").forward(request, response);
+		if (loginName.equals("") || password.equals("")) {
+			if (loginName.equals("")) {
+				request.setAttribute("log1", "用户名不能为空！");
+				request.setAttribute("islogSuccess1", 1);
+			}
+			if (password.equals("")) {
+				request.setAttribute("log2", "请输入密码！");
+				request.setAttribute("islogSuccess2", 2);
+			}
+			request.getRequestDispatcher("/welcome.jsp").forward(request, response);
 		} else {
-			response.sendRedirect("login.jsp");
+			// 登录处理
+			SysUser loginUser = this.userService.login(loginName, password);
+
+			if (loginUser != null) {
+				session.setAttribute("loginUser", loginUser);
+				System.out.println(Constant.TIME.format(new Date()) + "用户登录 -- 用户名:" + loginUser.getLoginName());
+
+				List<SysBook> bookList = this.bookService.getAll();
+				request.setAttribute("bookList", bookList);
+				request.getRequestDispatcher("/index.jsp").forward(request, response);
+			} else {
+				request.setAttribute("log2", "请输入正确的用户名和密码！");
+				request.setAttribute("islogSuccess2", 2);
+				request.getRequestDispatcher("/welcome.jsp").forward(request, response);
+			}
 		}
 	}
 
@@ -192,7 +207,7 @@ public class SysUserServlet extends HttpServlet {
 			throws ServletException, IOException {
 		boolean flag = this.userService.isExits(loginName);
 
-		// 新版登录
+		// 新版注册
 		if (flag || loginName.equals("") || realName.equals("") || roleId.equals("") || password.equals("")
 				|| password.length() < 8 || confirmPassword.equals("") || (password.equals(confirmPassword) == false)) {
 			if (loginName.equals("")) {
@@ -299,7 +314,7 @@ public class SysUserServlet extends HttpServlet {
 //			request.setAttribute("reg", "注册失败,存在同名用户！");
 ////			request.getRequestDispatcher("/reg.jsp").forward(request, response);
 //		}
-//		request.getRequestDispatcher("/reg.jsp").forward(request, response);
+		request.getRequestDispatcher("/reg.jsp").forward(request, response);
 	}
 
 	private void getAll(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

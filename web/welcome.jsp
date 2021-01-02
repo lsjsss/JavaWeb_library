@@ -44,6 +44,11 @@ body {
 							<input class="form-control" id="loginName" name="loginName"
 								placeholder="username">
 						</div>
+						<div class="col-sm-5">
+							<c:if test="${islogSuccess1 eq 1}">
+								<label for="text" class="control-label">${log1}</label>
+							</c:if>
+						</div>
 					</div>
 					<div class="form-group">
 						<label for="password" class="col-sm-2 control-label">密&ensp;&ensp;&ensp;&ensp;码
@@ -51,6 +56,11 @@ body {
 						<div class="col-sm-5">
 							<input type="password" class="form-control" id="password"
 								name="password" placeholder="password">
+						</div>
+						<div class="col-sm-5">
+							<c:if test="${islogSuccess2 eq 2}">
+								<label for="text" class="control-label">${log2}</label>
+							</c:if>
 						</div>
 					</div>
 					<div class="form-group">

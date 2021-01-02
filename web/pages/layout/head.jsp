@@ -49,10 +49,10 @@
 					</ul>
 				</c:if>
 				<form class="navbar-form navbar-left" method="post"
-					action="${ctx}/message.do?type=query">
+					action="${ctx}/book.do?type=search">
 					<div class="form-group">
-						<input type="text" id="aaa" name="aaa" class="form-control"
-							placeholder="请输入搜索的内容">
+						<input type="text" id="searchType" name="searchType" class="form-control"
+							placeholder="请输入要搜索的图书">
 					</div>
 					<button type="submit" class="btn btn-default">搜索</button>
 				</form>

@@ -43,6 +43,7 @@ public class BookServlet extends HttpServlet {
 		String author = request.getParameter("author");
 		String publisher = request.getParameter("publisher");
 		String bookNumbers = request.getParameter("bookNumbers");
+		String searchType = request.getParameter("searchType");
 
 		if (type.equals("getAll")) {
 			getAll(request, response);
@@ -56,7 +57,17 @@ public class BookServlet extends HttpServlet {
 			add(request, response, bookName, author, publisher, bookNumbers);
 		} else if (type.equals("delete")) {
 			delete(request, response, id);
+		} else if(type.equals("search")) {
+			search(request, response, searchType);
 		}
+	}
+
+	private void search(HttpServletRequest request, HttpServletResponse response, String searchType) throws ServletException, IOException {
+
+		request.setAttribute("searchType", searchType);
+		List<SysBook> bookList = this.bookService.getAll();
+		request.setAttribute("bookList", bookList);
+		request.getRequestDispatcher("/pages/book/searchbook.jsp").forward(request, response);
 	}
 
 	private void delete(HttpServletRequest request, HttpServletResponse response, String id)
