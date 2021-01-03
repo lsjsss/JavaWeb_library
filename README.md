@@ -1,8 +1,54 @@
 # 项目进程
 
+## JavaWeb 小型图书管理系统 - 第六组
+
+### 项目成员：
+
+薄曜然、李帅君、刘云鹏、张梓怡
+
+### 项目历时：
+
+7天
 
 
 
+---
+
+## 2020.01.03（项目结束）
+
+### 新增功能
+
+无新增新增功能
+
+
+
+### 已实现功能
+
+无新增已实现功能
+
+
+
+### 待实现功能
+
+全部功能需求已实现
+
+
+
+### 待完善功能
+
+无新增待完善功能
+
+
+
+### 待解决问题
+
+普通用户可越权访问管理员管理页面（遗留问题）
+
+![C00B9164-79B3-469E-8F95-6F5F38CCC318.jpeg](http://fanyapbl.fy.chaoxing.com/pbl/download/998acb46bde00fcac222e08af0de4108)
+
+![48D7F4F5-AE2B-4D18-B967-B81EBAAF39E8.jpeg](http://fanyapbl.fy.chaoxing.com/pbl/download/371797b40713da37a1d65a014a70b05f)
+
+![DC2034AA-9ED2-44BC-909B-8E2E65C5D540.jpeg](http://fanyapbl.fy.chaoxing.com/pbl/download/dc651312321270c5b785ebfdab2b3261)
 
 
 
